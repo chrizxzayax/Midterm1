@@ -2,14 +2,18 @@
 
 #include <iostream>
 using namespace std;
+
+// constants for random list size and value ranges
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+// Doubly linked list class
 class DoublyLinkedList {
 private:
-  struct Node {
-    int data;
+  struct Node {// Node structure for doubly linked list each one stores an int and has prev and next pointers
+    int data;// the value or data stored in the node(s)
     Node *prev;
     Node *next;
+    // constructor of nodes to start data and pointers
     Node(int val, Node *p = nullptr, Node *n = nullptr) {
       data = val;
       prev = p;
@@ -100,7 +104,7 @@ public:
     temp->next->prev = tempPrev;
     delete temp;
   }
-  
+
   void push_back(int v) {
     Node *newNode = new Node(v);
     if (!tail)
@@ -188,5 +192,13 @@ public:
 
 int main() {
   cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
-  compiler warning return 0;
+  DoublyLinkedList list;
+
+  cout << "list forward:  ";
+  list.print();
+  //to print the list forward
+  cout << "list backward: ";
+  list.print_reverse();
+  //to print the list backward
+    return 0;
 }
