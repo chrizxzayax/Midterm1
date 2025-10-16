@@ -20,45 +20,53 @@ private:
       next = n;
     }
   };
+
   Node *head;
-  Node *tail;
+  Node *tail;// pointers to the start and end of the list
 
 public:
+//a default constructor to start an empty list with head and tail as nullptr
   DoublyLinkedList() {
     head = nullptr;
     tail = nullptr;
   }
+  // insert new node after a given position 
   void insert_after(int value, int position) {
     if (position < 0) {
       cout << "Position must be >= 0." << endl;
       return;
     }
-    Node *newNode = new Node(value);
-    if (!head) {
+
+    Node *newNode = new Node(value);// create the new node
+    if (!head) {// if the list is empty then we set head and tail to the new node
       head = tail = newNode;
       return;
     }
+
     Node *temp = head;
-    for (int i = 0; i < position && temp; ++i)
+    for (int i = 0; i < position && temp; ++i)//loop to find the position
       temp = temp->next;
-    if (!temp) {
+    
+    if (!temp) {// if position is out of bounds
       cout << "Position exceeds list size. Node not inserted.\n";
-      delete newNode;
+      delete newNode;// in case of memory leak
       return;
     }
+
     newNode->next = temp->next;
-    newNode->prev = temp;
+    newNode->prev = temp;// adjust the pointers to link the new node
     if (temp->next)
       temp->next->prev = newNode;
     else
       tail = newNode;
-    temp->next = newNode;
+    temp->next = newNode;//if inserting at the end update tail
   }
 
+    // a method to erase a node by their value
   void delete_val(int value) {
-    if (!head)
+    if (!head)// if the list is empty
       return;
-    Node *temp = head;
+    Node *temp = head;// go through the list to find the node with the given value
     while (temp && temp->data != value)
       temp = temp->next;
     if (!temp)
@@ -67,42 +75,51 @@ public:
       temp->prev->next = temp->next;
     else
       head = temp->next;
+    // if the node to delete is the head, update head
     if (temp->next)
       temp->next->prev = temp->prev;
     else
       tail = temp->prev;
-    delete temp;
+    delete temp;// delete the node
   }
 
+    // erase node by position (1based? I am not sure)
   void delete_pos(int pos) {
     if (!head) {
       cout << "List is empty." << endl;
       return;
-    }
+    }// empty list case
+    
     if (pos == 1) {
       pop_front();
       return;
-    }
-    Node *temp = head;
-    for (int i = 1; i < pos; i++) {
+    }//if deleting head node
+
+    Node *temp = head;// start from head node
+
+    for (int i = 1; i < pos; i++) {// loop to find the position
       if (!temp) {
         cout << "Position doesn't exist." << endl;
         return;
       } else
-        temp = temp->next;
+        temp = temp->next;// move to next node
     }
+
     if (!temp) {
       cout << "Position doesn't exist." << endl;
       return;
-    }
+    }// if position is out of bounds
+
     if (!temp->next) {
       pop_back();
       return;
-    }
-    Node *tempPrev = temp->prev;
+    }// if deleting tail node
+
+    Node *tempPrev = temp->prev;// pointer to the previous node
+    // adjust pointers to remove the node from the list
     tempPrev->next = temp->next;
-    temp->next->prev = tempPrev;
-    delete temp;
+    temp->next->prev = tempPrev;// link the next node back to the previous node
+    delete temp;// delete the node 
   }
 
   void push_back(int v) {
