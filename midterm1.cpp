@@ -15,6 +15,7 @@ private:
     Node *next;
     // constructor of nodes to start data and pointers
     Node(int val, Node *p = nullptr, Node *n = nullptr) {
+        // initialize data and pointers 
       data = val;
       prev = p;
       next = n;
@@ -121,91 +122,102 @@ public:
     temp->next->prev = tempPrev;// link the next node back to the previous node
     delete temp;// delete the node 
   }
-
+// method to add a node at the end of the list
   void push_back(int v) {
     Node *newNode = new Node(v);
     if (!tail)
       head = tail = newNode;
-    else {
+    else {// if the list is not empty
       tail->next = newNode;
       newNode->prev = tail;
       tail = newNode;
     }
   }
-
+  // method to add a node at the front of the list
   void push_front(int v) {
     Node *newNode = new Node(v);
     if (!head)
       head = tail = newNode;
-    else {
+    else {// if the list is not empty again!
       newNode->next = head;
       head->prev = newNode;
       head = newNode;
     }
   }
 
+  // pop front?? im guessing to delete the head node
   void pop_front() {
     if (!head) {
       cout << "List is empty." << endl;
       return;
     }
     Node *temp = head;
-    if (head->next) {
+    if (head->next) {// if there's more than one node
       head = head->next;
       head->prev = nullptr;
     } else
-      head = tail = nullptr;
+      head = tail = nullptr;// if list became empty once again
     delete temp;
   }
-
+  // this method is to delete the tail node
   void pop_back() {
     if (!tail) {
       cout << "List is empty." << endl;
-      return;
+      return;// if the list is empty!
     }
-    Node *temp = tail;
+
+    Node *temp = tail;// pointer to the tail node
+
     if (tail->prev) {
       tail = tail->prev;
       tail->next = nullptr;
     } else
       head = tail = nullptr;
-    delete temp;
+    delete temp;// if list became empty
   }
 
+  // destructor to free memory
   ~DoublyLinkedList() {
     while (head) {
       Node *temp = head;
       head = head->next;
-      delete temp;
+      delete temp;// delete each node
     }
   }
-
+// method to print all the elements in the list
   void print() {
     Node *current = head;
     if (!current) {
       cout << "List is empty." << endl;
       return;
     }
-    while (current) {
+    while (current) {// "traverse" through the list
       cout << current->data << " ";
       current = current->next;
     }
     cout << endl;
   }
-
+// method to print the list in reverse order
   void print_reverse() {
     Node *current = tail;
     if (!current) {
       cout << "List is empty." << endl;
       return;
     }
-    while (current) {
+    while (current) {// traverse backwards
       cout << current->data << " ";
       current = current->prev;
     }
-    cout << endl;
+    cout << endl;// end with a new line
   }
 };
+
+
+//
+//What Im gathering from this code is that it gives a reusable doubly linked list class with various methods to manipulate the list such as inserting, deleting, and printing nodes. 
+// The main function demonstrates creating a list and printing it in both forward and reverse order.
+// like an excercise to show the functionality of the doubly linked list class and memory management
+//
 
 int main() {
   cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
