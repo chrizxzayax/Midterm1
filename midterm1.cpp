@@ -219,10 +219,11 @@ public:
     }
     int index = 1;// to keep track of their positions
     while (current) {// traverse the list
-      if (index % 2 == 0)
-        cout << current->data << " ";
-      current = current->next;
-      index++;
+        cout << current->data << " ";// print the current node's data
+        if (current->next && current->next->next) {// if there are at least two more nodes
+          current = current->next->next;// move two nodes ahead
+        } else
+            break;// if not, exit the loop
     }
     cout << endl;
   }
