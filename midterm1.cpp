@@ -212,13 +212,12 @@ public:
   }
 
   void every_other_element() {// method to print every other element in the list
-    if (!head) {
+    Node* current = head;// start from head
+    if (!current) {// if the list is empty
       cout << "List is empty." << endl;
       return;
     }
-
-    Node *current = head;// start from head
-    int index = 0;
+    int index = 1;// to keep track of their positions
     while (current) {// traverse the list
       if (index % 2 == 0)
         cout << current->data << " ";
@@ -229,7 +228,6 @@ public:
   }
 };
 
-
 //
 //What Im gathering from this code is that it gives a reusable doubly linked list class with various methods to manipulate the list such as inserting, deleting, and printing nodes. 
 // The main function demonstrates creating a list and printing it in both forward and reverse order.
@@ -237,27 +235,35 @@ public:
 //
 
 int main() {
-  cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
-  DoublyLinkedList list;
-
-  cout << "list forward:  ";
-  list.print();
-  //to print the list forward
-  cout << "list backward: ";
-  list.print_reverse();
-  //to print the list backward
-
-    int size = rand() % (MAX_LS - MIN_LS + 1) + MIN_LS;
-    for (int i = 0; i < size; i++) {
-      list.push_back(rand() % 100);
-    }
+    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid
+    DoublyLinkedList list;
 
     cout << "list forward:  ";
     list.print();
+    //to print the list forward
     cout << "list backward: ";
     list.print_reverse();
-    cout << "every other element: ";
+    //to print the list backward
+
+    int size = rand() % (MAX_LS - MIN_LS + 1) + MIN_LS;// random size for the list
+
+    for (int i = 0; i < size; ++i) {// loop to populate the list
+      list.push_back(rand() % (MAX_NR - MIN_NR + 1) + MIN_NR);// fill the list with random values
+    }
+
+    // print the list in both directions
+    cout << "list forward:  ";
+    list.print();
+    // print the list in both directions
+    cout << "list backward: ";
+    list.print_reverse();
+    // print the list in both directions again
+    cout << "every other element (starting with the first (head)): ";
     list.every_other_element();
+    //show insert after method
+    cout << "insert 123 after 2nd node:\n";
+    list.insert_after(123, 1);
+    list.print();
 
     return 0;
 
