@@ -262,8 +262,28 @@ int main() {
     list.every_other_element();
     //show insert after method
     cout << "insert 123 after 2nd node:\n";
-    list.insert_after(123, 1);
+    list.insert_after(123, 1);// insert 123 after the 2nd node 
     list.print();
+    //show delete by value method
+    cout << "delete node with value 123:\n";
+    list.delete_val(123);// delete the node with value 123
+    list.print();
+    //show pop front method
+    cout << "pop front:\n";
+    list.pop_front();// remove the head node
+    list.print();
+    //show pop back method
+    cout << "pop back:\n";
+    list.pop_back();// remove the tail node
+    list.print();
+    //show push front method
+    cout << "delete node at position 3:\n";
+    list.delete_pos(2);// delete the node at position 2
+    list.print();
+
+    //show push front method
+    cout << "every other element (starting with the first (head)): ";
+    list.every_other_element();
 
     return 0;
 
