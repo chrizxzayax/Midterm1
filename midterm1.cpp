@@ -210,6 +210,23 @@ public:
     }
     cout << endl;// end with a new line
   }
+
+  void every_other_element() {// method to print every other element in the list
+    if (!head) {
+      cout << "List is empty." << endl;
+      return;
+    }
+
+    Node *current = head;// start from head
+    int index = 0;
+    while (current) {// traverse the list
+      if (index % 2 == 0)
+        cout << current->data << " ";
+      current = current->next;
+      index++;
+    }
+    cout << endl;
+  }
 };
 
 
@@ -229,5 +246,20 @@ int main() {
   cout << "list backward: ";
   list.print_reverse();
   //to print the list backward
+
+    int size = rand() % (MAX_LS - MIN_LS + 1) + MIN_LS;
+    for (int i = 0; i < size; i++) {
+      list.push_back(rand() % 100);
+    }
+
+    cout << "list forward:  ";
+    list.print();
+    cout << "list backward: ";
+    list.print_reverse();
+    cout << "every other element: ";
+    list.every_other_element();
+
     return 0;
+
+
 }
